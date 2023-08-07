@@ -2,10 +2,9 @@ pipeline {
     agent any
     stages {
         stage('Checkout') {
-            steps {
-                // Checkout code from GitHub
-                git 'https://github.com/rahulmalavCAR/sample_pro.git'
-            }
+            steps{
+              git branch: 'main', url:'https://github.com/rahulmalavCAR/sample_pro.git'
+          }
         }
         stage('Build') {
             steps {
