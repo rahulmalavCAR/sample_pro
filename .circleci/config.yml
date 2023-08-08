@@ -9,8 +9,8 @@ jobs:
           name: Install Dependencies
           command: npm install
       - run:
-          name: Build android
-          command: npx react-native build android
+          name: start
+          command: npm start
  
 
   test:
