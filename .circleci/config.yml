@@ -2,15 +2,30 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.2
 jobs:
-  build_and_test: # this can be any name you choose
-    executor: node/default # use the default executor defined within the orb
+  build_and_test:
+    executor: node/default
+
+    environment:
+      MY_API_KEY: $MY_API_KEY
+
     steps:
       - checkout
+      - run:
+          name: testing context env
+          command: echo $MY_API_KEY
+
       - node/install-packages:
           pkg-manager: npm
+
+      - run:
+            command: printenv
+            name: Print Environment Variables
+      
+          
+
       - run:
           command: npm run config-react-native
-          name: Build app
+          name: Build App
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -19,6 +34,5 @@ jobs:
 workflows:
   build:
     jobs:
-      - build_and_test
-
-      
+      - build_and_test:
+          context: Sample_Context
