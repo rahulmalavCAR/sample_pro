@@ -9,7 +9,7 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run:
-          command: npm run build-react-native
+          command: npm run config-react-native
           name: Build app
       - persist_to_workspace:
           root: ~/project
