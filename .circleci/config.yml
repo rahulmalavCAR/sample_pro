@@ -19,13 +19,12 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
 
-      - manual_approval: 
-            type: approval
-            requires:
-              - node
       - run:
             command: printenv
             name: Print Environment Variables
+
+      - hold:
+          type:approval
       
       - run:
             command: npm test
@@ -63,5 +62,6 @@ workflows:
   build:
     jobs:
       - build_and_test:
+
           context: slack-secrets
                 
