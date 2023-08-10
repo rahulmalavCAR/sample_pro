@@ -28,7 +28,7 @@ jobs:
             name: Test
 
       - slack/notify:
-          channel: CI-CD
+          channel: ci-cd
           event: fail
           template: basic_fail_1
           custom: | # your custom notification goes here
