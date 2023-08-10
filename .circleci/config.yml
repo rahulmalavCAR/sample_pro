@@ -19,6 +19,10 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
 
+      - manual_approval: 
+            type: approval
+            requires:
+              - node
       - run:
             command: printenv
             name: Print Environment Variables
