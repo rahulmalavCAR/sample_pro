@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.2
-  slack: circleci/slack@4.2.0
+  slack: circleci/slack@4.12.5
   
 jobs:
   build_and_test:
@@ -31,14 +31,21 @@ jobs:
           channel: CI-CD
           event: fail
           template: basic_fail_1
-          attachments: |
-            [
+          custom: | # your custom notification goes here
               {
-                "title": "Test Failure",
-                "text": "One or more tests failed in the build.",
-                "color": "#FF0000"
+                "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+              {
+                "type": "plain_text",
+                "text": "*This is a text notification*",
+                "emoji": true
               }
-            ]
+              ]
+                }
+                  ]
+                    }
 
       - run:
           command: npm run config-react-native
