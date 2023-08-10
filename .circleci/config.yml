@@ -23,45 +23,55 @@ jobs:
             command: printenv
             name: Print Environment Variables
 
-      - hold:
-          type:approval
       
-      - run:
-            command: npm test
-            name: Test
+      
+      # - run:
+      #       command: npm test
+      #       name: Test
 
-      - slack/notify:
-          channel: ci-cd
-          event: fail
-          template: basic_fail_1
-          custom: | # your custom notification goes here
-              {
-                "blocks": [
-                {
-                  "type": "section",
-                  "fields": [
-              {
-                "type": "plain_text",
-                "text": "*This is a text notification*",
-                "emoji": true
-              }
-              ]
-                }
-                  ]
-                    }
+      # - slack/notify:
+      #     channel: ci-cd
+      #     event: fail
+      #     template: basic_fail_1
+      #     custom: | # your custom notification goes here
+      #         {
+      #           "blocks": [
+      #           {
+      #             "type": "section",
+      #             "fields": [
+      #         {
+      #           "type": "plain_text",
+      #           "text": "*This is a text notification*",
+      #           "emoji": true
+      #         }
+      #         ]
+      #           }
+      #             ]
+      #               }
 
-      - run:
-          command: npm run config-react-native
-          name: Build App
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - .
+      # - run:
+      #     command: npm run config-react-native
+      #     name: Build App
+      # - persist_to_workspace:
+      #     root: ~/project
+      #     paths:
+      #       - .
+  
+  on_hold_feature:
+      docker:
+      - image: cimg/base:2022.03
+      steps:
+        - checkout
+        - run: echo 'waited for approval'
+            
 
 workflows:
   build:
     jobs:
       - build_and_test:
-
           context: slack-secrets
-                
+          type: approval
+          
+      - on_hold_feature:
+          requires:
+            - build_and_test
