@@ -7,14 +7,14 @@ jobs:
   build_and_test:
     executor: node/default
 
-    environment:
-      MY_API_KEY: $MY_API_KEY
+    # environment:
+    #   MY_API_KEY: $MY_API_KEY
 
     steps:
       - checkout
-      - run:
-          name: testing context env
-          command: echo $MY_API_KEY
+      # - run:
+      #     name: testing context env
+      #     command: echo $MY_API_KEY
 
       - node/install-packages:
           pkg-manager: npm
@@ -52,4 +52,5 @@ workflows:
   build:
     jobs:
       - build_and_test:
-          context: Sample_Context
+          context: slack-secrets
+                
