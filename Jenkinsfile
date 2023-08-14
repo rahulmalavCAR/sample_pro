@@ -21,8 +21,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // Deploy your app (e.g., to a testing environment)
-                // You can use tools like Fastlane or AppCenter
+                // depoly here
             }
         }
     }
