@@ -70,7 +70,9 @@ workflows:
     jobs:
       - build_and_test:
           context: slack-secrets
-          type: approval
+      
+      - hold:
+            type: approval
           
       - on_hold_feature:
           requires:
